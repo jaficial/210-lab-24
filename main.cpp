@@ -1,19 +1,21 @@
 // COMSC-210 | Lab 24 | Jed Aficial 
 // github link: https://github.com/jaficial/210-lab-24
-//
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <list>
+#include <set>
 #include "Goat.h"
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string [], string []);
-void display_trip(list<Goat> trip);
+/* NOTE: Syntax for using sets are very similar to using lists. Only had
+         to change the data type from list to set throughout the code. */ 
+int select_goat(set<Goat> trip);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string [], string []);
+void display_trip(set<Goat> trip);
 int main_menu();
 
 int main_menu(){
@@ -33,19 +35,20 @@ int main_menu(){
     return choice;
 }
 
-// NOTE: parameters for goat: (name, age, color)
-// add_goat selects a random age, name, and color for the goat, creates a temporary Goat object with teh random parameters, and pushes the object into the trip list 
-void add_goat(list <Goat> &trip, string name[], string color[]){
+/*NOTE: parameters for goat: (name, age, color)
+        add_goat selects a random age, name, and color for the goat, creates a temporary
+        Goat object with the random parameters, and pushes the object into the trip set */
+void add_goat(set <Goat> &trip, string name[], string color[]){
     int temp_age = rand() % MAX_AGE;
     int temp_name = rand() % SZ_NAMES;
     int temp_color = rand() % SZ_COLORS;
     
     Goat temp(name[temp_name], temp_age, color[temp_color]);
-    trip.push_back(temp);
+    trip.insert(temp); // had to replace "push_back" method with ".insert" method
 }
 
 // display_trip takes in the trip list as a parameter, iterates thorugh the list, and outputs the name, color, and age of each Goat object in the list
-void display_trip(list <Goat> trip){
+void display_trip(set <Goat> trip){
     int iter = 1;
     for (auto val : trip){
         cout << "\t" << "[" << iter << "] " << val.get_name() << " (" << val.get_age() << ", " << val.get_color() << ")" << endl;
@@ -55,7 +58,7 @@ void display_trip(list <Goat> trip){
 
 // selecte_goat takes in the trip list as a parameter, displays the list, then asks for which goat the user would like to delete
 // the user is to select the index of the goat that they would like to delete from the list
-int select_goat(list <Goat> trip){
+int select_goat(set <Goat> trip){
     int selection;
     display_trip(trip);
     cout << "Index Selection: ";
@@ -69,7 +72,7 @@ int select_goat(list <Goat> trip){
 }
 
 // delete_goat takes in the trip list as a parameter, utilizes the select_goat function to allow the user to select the index of a goat, and deletes the goat at the selected index
-void delete_goat(list <Goat> &trip){
+void delete_goat(set <Goat> &trip){
     cout << "Please input the index of the goat from the trip below, that you would like to delete." << endl;
     int temp_selection = select_goat(trip); 
     if (temp_selection == -1){ // if there was an invalid selection, function returns to main
@@ -100,7 +103,7 @@ int main() {
     while (fin1 >> colors[i++]); // while loop inserts all possible colors from the colors.txt file into an array "colors"
     fin1.close();
 
-    list<Goat> trip; // list of Goat objects is created
+    set<Goat> trip; // list of Goat objects is created
 
    // GM3K1 ENGINE THAT WILL LOOP THE main_menu function
     bool menu = true;
