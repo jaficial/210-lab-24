@@ -47,7 +47,8 @@ void add_goat(set <Goat> &trip, string name[], string color[]){
     trip.insert(temp); // had to replace "push_back" method with ".insert" method
 }
 
-// display_trip takes in the trip list as a parameter, iterates thorugh the list, and outputs the name, color, and age of each Goat object in the list
+// display_trip takes in the trip set as a parameter, iterates thorugh the set,
+// and outputs the name, color, and age of each Goat object in the set
 void display_trip(set <Goat> trip){
     int iter = 1;
     for (auto val : trip){
@@ -56,8 +57,8 @@ void display_trip(set <Goat> trip){
     }
 }
 
-// selecte_goat takes in the trip list as a parameter, displays the list, then asks for which goat the user would like to delete
-// the user is to select the index of the goat that they would like to delete from the list
+// selecte_goat takes in the trip set as a parameter, displays the set, then asks for which goat the user 
+// would like to delete. The user is to select the index of the goat that they would like to delete from the set
 int select_goat(set <Goat> trip){
     int selection;
     display_trip(trip);
@@ -71,7 +72,8 @@ int select_goat(set <Goat> trip){
     return selection; // else returns the index selection
 }
 
-// delete_goat takes in the trip list as a parameter, utilizes the select_goat function to allow the user to select the index of a goat, and deletes the goat at the selected index
+/* delete_goat takes in the trip set as a parameter, utilizes the select_goat function
+   to allow the user to select the index of a goat, and deletes the goat at the selected index */
 void delete_goat(set <Goat> &trip){
     cout << "Please input the index of the goat from the trip below, that you would like to delete." << endl;
     int temp_selection = select_goat(trip); 
@@ -79,7 +81,7 @@ void delete_goat(set <Goat> &trip){
         return;
     }
 
-    auto iter = trip.begin(); // NOTE: .begin() returns an iterator to first element of list
+    auto iter = trip.begin(); // NOTE: .begin() returns an iterator to first element of set
     for (int i = 0; i < temp_selection - 1; i++){ // temp_selection - 1 because displaying the trip begins with 1 representing index 0 of the list
         iter++;
     }
@@ -103,7 +105,7 @@ int main() {
     while (fin1 >> colors[i++]); // while loop inserts all possible colors from the colors.txt file into an array "colors"
     fin1.close();
 
-    set<Goat> trip; // list of Goat objects is created
+    set<Goat> trip; // set of Goat objects is created
 
    // GM3K1 ENGINE THAT WILL LOOP THE main_menu function
     bool menu = true;
