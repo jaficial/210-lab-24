@@ -1,5 +1,5 @@
-// COMSC-210 | Lab 23 | Jed Aficial 
-// github link: https://github.com/jaficial/210-lab-23
+// COMSC-210 | Lab 24 | Jed Aficial 
+// github link: https://github.com/jaficial/210-lab-24
 
 #ifndef GOAT_H
 #define GOAT_H
